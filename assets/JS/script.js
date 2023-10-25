@@ -5,7 +5,7 @@ fetch("Data/movies.json")
     console.log(data);
     console.log(data.results);
 
-
+    const infosContainer = document.querySelector('#infos');
     for (const movie of data.results) {
         
         const card = document.createElement('div');
