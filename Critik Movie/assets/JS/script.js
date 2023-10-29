@@ -24,14 +24,33 @@ fetch("Data/movies.json")
 
       infosContainer.appendChild(card);
     }
+    
   });
-// Sélectionnez l'élément p contenant la note
+  const searchBar = document.querySelector("#searchBar");
+   
+  searchBar.addEventListener("keyup", (e)=> {
+    const searchedLetter = e.target.value
+    const cards = document.querySelectorAll("card");
+    filterElements(searchedLetter, cards)
+  
+  })
+  
+  function filterElements(letters, title) {
+    if(letters.length > 2){
+      for (let i = 0; i < title.length; i++) {
+        if(title[i].textContent.toLowerCase().includes(letters.toLowerCase())){
+          title[i].style.display = "block";
+        } else {
+          title[i].style.display = "none";
+        }
+    } 
+  }}
+
 const ratingElement = document.querySelector(".rating");
 
-// Obtenez la valeur de la note en pourcentage
+
 const ratingValue = movie.vote_average * 10;
 
-// Appliquez la couleur en fonction de la plage de notes
 if (ratingValue < 35) {
   ratingElement.style.color = "red";
 } else if (ratingValue >= 35 && ratingValue < 60) {
@@ -41,22 +60,18 @@ if (ratingValue < 35) {
 }
 
 window.onload = function() {
-  // Récupérer l'élément de la popup par son ID
+
   let popup = document.querySelector("#pop-up");
 
-  // Récupérer les boutons "Accepter" et "Refuser"
+
   let acceptButton = popup.querySelector(".accept");
   let rejectButton = popup.querySelector(".reject");
 
-  // Afficher la popup
   popup.style.display = "block";
 
-  // Gérer le clic sur le bouton "Accepter"
+
   acceptButton.addEventListener("click", function() {
-      // Cacher la popup lorsque le bouton "Accepter" est cliqué
       popup.style.display = "none";
   });
 };
 
-// import results from '../../Data/movies.json' assert { type: 'json' }
-// console.log(results)
