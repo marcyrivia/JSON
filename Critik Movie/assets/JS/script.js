@@ -1,17 +1,24 @@
+ function recuperation(movie){
+  window.location.href = `movie.html?index=${movie.id}`
+ }
+
+
+
 fetch("Data/movies.json")
   .then((res) => res.json())
   .then((data) => {
     console.log(data);
     console.log(data.results);
-
+    
     const infosContainer = document.querySelector("#infos");
     for (const movie of data.results) {
       const card = document.createElement("div");
       card.classList.add("card");
+      console.log(movie.id);
 
       card.innerHTML = `
         <i class="bi bi-plus-circle-fill icons-plus"></i>
-    <img class="imgMovie" src="https://image.tmdb.org/t/p/original/${
+    <img class="imgMovie"  src="https://image.tmdb.org/t/p/original/${
       movie.poster_path
     }" alt="${movie.title}">
     <h2>${movie.title}</h2>
@@ -23,6 +30,10 @@ fetch("Data/movies.json")
         `;
 
       infosContainer.appendChild(card);
+      card.addEventListener("click", function () {
+        recuperation()
+      }
+      )
     }
     
   });
@@ -37,7 +48,7 @@ fetch("Data/movies.json")
   
   function filterElements(letters, title) {
     if(letters.length > 2){
-      for (let i = 0; i < title.length; i++) {
+      for (let i = 0; i < letters.length; i++) {
         if(title[i].textContent.toLowerCase().includes(letters.toLowerCase())){
           title[i].style.display = "block";
         } else {
@@ -46,32 +57,32 @@ fetch("Data/movies.json")
     } 
   }}
 
-const ratingElement = document.querySelector(".rating");
+// const ratingElement = document.querySelector(".rating");
 
 
-const ratingValue = movie.vote_average * 10;
+// const ratingValue = movie.vote_average * 10;
 
-if (ratingValue < 35) {
-  ratingElement.style.color = "red";
-} else if (ratingValue >= 35 && ratingValue < 60) {
-  ratingElement.style.color = "orange";
-} else {
-  ratingElement.style.color = "green";
-}
+// if (ratingValue < 35) {
+//   ratingElement.style.color = "red";
+// } else if (ratingValue >= 35 && ratingValue < 60) {
+//   ratingElement.style.color = "orange";
+// } else {
+//   ratingElement.style.color = "green";
+// }
 
-window.onload = function() {
+// window.onload = function() {
 
-  let popup = document.querySelector("#pop-up");
-
-
-  let acceptButton = popup.querySelector(".accept");
-  let rejectButton = popup.querySelector(".reject");
-
-  popup.style.display = "block";
+//   let popup = document.querySelector("#pop-up");
 
 
-  acceptButton.addEventListener("click", function() {
-      popup.style.display = "none";
-  });
-};
+//   let acceptButton = popup.querySelector(".accept");
+//   let rejectButton = popup.querySelector(".reject");
+
+//   popup.style.display = "block";
+
+
+//   acceptButton.addEventListener("click", function() {
+//       popup.style.display = "none";
+//   });
+// };
 
