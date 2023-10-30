@@ -1,0 +1,47 @@
+body{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    background-color: #101010;
+}
+
+.imgMovie{
+    width: 100%;
+    height: 50vh
+}
+
+.title{
+    color: #06dc06;
+}
+
+.rated {
+    background-color: white;
+    width: 20vh;
+    height: 20vh;
+   border-radius: 42% 58% 54% 46% / 54% 56% 44% 46%  ;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   position: absolute;
+   left: 82vh;
+   bottom: 65vh;
+
+}
+
+.egg{
+    height: 12vh;
+    width: 12vh;
+    background-color: #F5C904;
+    border-radius: 50% 50% 51% 49% / 61% 65% 35% 39% ;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+.rating{
+    font-weight: 12px;
+}
+
