@@ -2,6 +2,65 @@
   window.location.href = `movie.html?index=${movie.id}`
  }
 
+ const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MTdjYzc0OTU1MTQ5YmUyM2RmODM4MTNmMjAxYTRlOCIsInN1YiI6IjYyODM5OGJiZWM0NTUyMTAzMmE5NTcxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.REF4Oi-K06F7Jq8LolG5vPQtyeiGk3nBFdDyL1FLq7E'
+  }
+};
+fetch(`https://api.themoviedb.org/3/movie/now_playing?language=fr-FR&page=1`, options)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+    let index = 0
+    for (const movie of data.results) {
+      const infosRelease = document.querySelector('#release');
+
+      // Créer un lien avec l'ID du film dans l'URL
+      const link = document.createElement('div');
+
+      // Liste des images des films dernièrement sortis
+      const releaseHTML = `
+    <a href="movie.html?id=${movie.id}"><img class="img-fluid" id="imageLatest" src="https://image.tmdb.org/t/p/original${movie.poster_path}" alt="affiche film"></a>
+    
+    `
+      // Assigner la structure HTML au lien
+      link.innerHTML = releaseHTML;
+
+      // Ajouter le lien au conteneur
+      infosRelease.appendChild(link);
+      index++
+    }
+
+  })
+fetch('https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=1', options)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+    let index = 0
+    for (const movie of data.results) {
+      const infosPopular = document.querySelector('#popular');
+      // Créer un lien avec l'ID du film dans l'URL
+      const link = document.createElement('div');
+      // Liste des images de films plus populaires
+      const popularHTML = `
+    <a href="movie.html?id=${movie.id}"><img class="img-fluid" id="imageLatest" src="https://image.tmdb.org/t/p/original${movie.poster_path}" alt="affiche film"></a>
+    
+    `
+
+      // Assigner la structure HTML au lien
+      link.innerHTML = popularHTML;
+
+      // Ajouter le lien au conteneur
+      infosPopular.appendChild(link);
+      index++
+    }
+
+  })
+
+
+
 
 let bouton = document.querySelector("#btn-search")
 bouton.addEventListener("click", function (){
@@ -30,6 +89,10 @@ bouton.addEventListener("click", function (){
       const card = document.createElement("div");
       card.classList.add("card");
       console.log(movie.id);
+      let affichage = document.querySelector("#popular")
+      affichage.innerHTML = ""
+      let affich = document.querySelector("#release")
+      affich.innerHTML = ""
       
       card.innerHTML = `
       <i class="bi bi-plus-circle-fill icons-plus"></i>
